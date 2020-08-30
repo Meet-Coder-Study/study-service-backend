@@ -9,6 +9,7 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 
 import com.study.service.common.BaseEntity;
+import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 
@@ -37,7 +38,9 @@ public class User extends BaseEntity {
     @Enumerated(EnumType.STRING)
     private SocialType socialType;
 
-    public User(final String email, final String name, final String principal, final Role role, final SocialType socialType) {
+    @Builder
+    public User(final String email, final String name, final String principal, final Role role,
+            final SocialType socialType) {
         this.email = email;
         this.name = name;
         this.principal = principal;
