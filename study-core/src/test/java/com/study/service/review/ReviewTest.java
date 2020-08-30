@@ -52,14 +52,12 @@ class ReviewTest {
 
     @Test
     public void 회원리스트_널_예외_테스트() {
-        String message = assertThrows(NullPointerException.class, () -> Review.matchReview(null)).getMessage();
-
-        assertThat(message).isEqualTo("회원 리스트는 Null이 될 수 없습니다.");
+        assertThrows(NullPointerException.class, () -> Review.matchReview(null)).getMessage();
     }
 
     @Test
     public void 이전리스트와_같은_리뷰어를_선정할수없다() {
-
+        // TODO
     }
 
     // user list stub
