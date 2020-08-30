@@ -38,13 +38,9 @@ public class User extends BaseEntity {
     @Enumerated(EnumType.STRING)
     private SocialType socialType;
 
-<<<<<<< HEAD
     @Builder
     public User(final String email, final String name, final String principal, final Role role,
             final SocialType socialType) {
-=======
-    public User(final String email, final String name, final String principal, final Role role, final SocialType socialType) {
->>>>>>> 76a404329153a9fd584260d05ce5c8c4c4b93fae
         this.email = email;
         this.name = name;
         this.principal = principal;
