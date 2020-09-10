@@ -37,7 +37,7 @@ public class BatchConfiguration {
         this.itemWriter = itemWriter;
     }
 
-    @Bean
+    //@Bean
     public Job importReviewJob(JobRepository jobRepository, Step step1) {
         return jobBuilderFactory.get("importReviewJob")
                 .repository(jobRepository)
