@@ -56,4 +56,17 @@ class UserControllerTest {
                 .andExpect(jsonPath("[0].id").value(1L))
                 .andDo(print());
     }
+
+    @DisplayName("전체 유저 권한를 가져오는 테스트")
+    @Test
+    void findRolesTest() throws Exception {
+        mockMvc.perform(get("/api/v1/users/roles")
+                .contentType(MediaType.APPLICATION_JSON)
+                .accept(MediaType.APPLICATION_JSON)
+        )
+                .andExpect(status().isOk())
+                .andExpect(jsonPath("[0]").value(Role.ADMIN.name()))
+                .andExpect(jsonPath("[1]").value(Role.MEMBER.name()))
+                .andDo(print());
+    }
 }

@@ -7,6 +7,7 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.study.service.user.Role;
 import com.study.service.user.dto.UserDto;
 import com.study.service.user.service.UserService;
 import lombok.RequiredArgsConstructor;
@@ -23,5 +24,12 @@ public class UserController {
         final List<UserDto> users = userService.findUsers();
 
         return ResponseEntity.ok(users);
+    }
+
+    @GetMapping("/roles")
+    public ResponseEntity<Role[]> findRoles() {
+        final Role[] roles = Role.values();
+
+        return ResponseEntity.ok(roles);
     }
 }
