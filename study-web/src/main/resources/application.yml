@@ -3,10 +3,28 @@ spring:
     driver-class-name: org.h2.Driver
     url: jdbc:h2:~/testdb-blogposting2
 
-  jpa:
-    hibernate:
-      ddl-auto: update
-
   batch:
     job:
       enabled: false
+
+  jpa:
+    properties:
+      hibernate:
+        format_sql: true
+        use_sql_comments: true
+    show-sql: true
+
+    hibernate:
+      ddl-auto: create-drop
+
+  h2:
+    console:
+      enabled: true
+
+logging:
+  level:
+    org:
+      hibernate:
+        type:
+          descriptor:
+            sql: trace
