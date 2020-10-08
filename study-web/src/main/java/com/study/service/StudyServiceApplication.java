@@ -1,14 +1,16 @@
 package com.study.service;
 
-import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
-import org.springframework.context.annotation.ComponentScans;
-import org.springframework.data.jpa.repository.config.EnableJpaRepositories;
+import org.springframework.boot.autoconfigure.domain.EntityScan;
+import org.springframework.boot.builder.SpringApplicationBuilder;
 
-@SpringBootApplication
-@EnableJpaRepositories("com.study.service")
+@EntityScan("com.study.service")
+@SpringBootApplication(scanBasePackages = "com.study.service")
 public class StudyServiceApplication {
-    public static void main(String[] args) {
-        SpringApplication.run(StudyServiceApplication.class, args);
+
+    public static void main(final String[] args) {
+        new SpringApplicationBuilder(StudyServiceApplication.class)
+                .run(args);
     }
 }
+

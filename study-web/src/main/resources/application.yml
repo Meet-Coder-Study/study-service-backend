@@ -1,7 +1,12 @@
 spring:
   datasource:
     driver-class-name: org.h2.Driver
-    url: jdbc:h2:tcp://localhost/~/testdb
+    url: jdbc:h2:~/testdb-blogposting2
+
   jpa:
     hibernate:
       ddl-auto: update
+
+  batch:
+    job:
+      enabled: false

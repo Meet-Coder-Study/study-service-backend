@@ -9,8 +9,14 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 
 import com.study.service.common.BaseEntity;
+import com.study.service.review.Review;
+import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
+
+import java.util.ArrayList;
+import java.util.Collections;
+import java.util.List;
 
 @NoArgsConstructor
 @Getter
@@ -39,11 +45,32 @@ public class User extends BaseEntity {
     @Enumerated(EnumType.STRING)
     private SocialType socialType;
 
-    public User(final String email, final String name, final String principal, final Role role, final SocialType socialType) {
+    @Column
+    @Enumerated(EnumType.STRING)
+    private DeveloperType developerType;
+
+    @Builder
+    public User(final String email, final String name, final String principal, final Role role,
+                final SocialType socialType, final DeveloperType developerType) {
         this.email = email;
         this.name = name;
         this.principal = principal;
         this.role = role;
         this.socialType = socialType;
+        this.developerType = developerType;
     }
+
+    @Override
+    public String toString() {
+        return "User{" +
+                "id=" + id +
+                ", email='" + email + '\'' +
+                ", name='" + name + '\'' +
+                ", principal='" + principal + '\'' +
+                ", role=" + role +
+                ", socialType=" + socialType +
+                '}';
+    }
+
+
 }

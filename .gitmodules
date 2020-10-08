@@ -1,0 +1,3 @@
+[submodule "study-web/src/main/resources/config"]
+	path = study-web/src/main/resources/config
+	url = https://github.com/Blog-Posting/study-service-backend-sub.git
