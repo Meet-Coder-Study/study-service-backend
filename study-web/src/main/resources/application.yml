@@ -1,4 +1,9 @@
 spring:
+  profiles:
+    active: local
+    include:
+      - slack
+      - oauth2
   jpa:
     properties:
       hibernate:
@@ -18,5 +23,5 @@ logging:
     org:
       hibernate:
         type:
-          descriptor:
-            sql: trace
+        descriptor:
+        sql: trace
