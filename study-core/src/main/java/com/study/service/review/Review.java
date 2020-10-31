@@ -1,8 +1,11 @@
 package com.study.service.review;
 
-import java.util.ArrayList;
 import java.util.Collections;
+import java.util.Map;
 import java.util.List;
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.stream.Collectors;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -14,13 +17,17 @@ import javax.persistence.ManyToOne;
 import javax.validation.constraints.NotNull;
 
 import com.study.service.common.BaseEntity;
+import com.study.service.user.DeveloperType;
 import com.study.service.user.User;
+
 import lombok.Getter;
 import lombok.NoArgsConstructor;
+import lombok.RequiredArgsConstructor;
 
-@NoArgsConstructor
+
 @Entity
 @Getter
+@NoArgsConstructor
 public class Review extends BaseEntity {
 
     @Id
@@ -36,15 +43,51 @@ public class Review extends BaseEntity {
     @JoinColumn(name = "reviewee", referencedColumnName = "user_id")
     private User reviewee;
 
-    public Review(final User reviewer, final User reviewee) {
+    public Review(User reviewer, User reviewee) {
         this.reviewer = reviewer;
         this.reviewee = reviewee;
     }
 
-    public static List<Review> matchReview(@NotNull final List<User> users) {
-        Collections.shuffle(users);
+    public static List<Review> matchUsersByDevType(@NotNull List<User> users) {
 
-        final List<Review> reviews = new ArrayList<>();
+        Map<DeveloperType, List<User>> userMap = generateUserMap(users);
+
+        // separate into developer types
+        users
+                .stream()
+                .forEach(u -> {
+                    List<User> userListByDevType = userMap.get(u.getDeveloperType());
+                    if (userListByDevType != null) userListByDevType.add(u);
+                });
+
+
+        return userMap
+                .values()
+                .stream()
+                .map(userList -> matchUsers(userList))
+                .flatMap(List::stream)
+                .collect(Collectors.toList());
+    }
+
+    private static Map<DeveloperType, List<User>> generateUserMap(List<User> users) {
+        Map<DeveloperType, List<User>> maps = new HashMap<>(DeveloperType.values().length);
+
+        // get developer types in users
+        users
+                .stream()
+                .map(User::getDeveloperType)
+                .collect(Collectors.toSet())
+                .forEach(devType -> maps.put(devType, new ArrayList<>()));
+
+        return maps;
+    }
+
+    private static List<Review> matchUsers(@NotNull List<User> users) {
+        if (users.size() <= 1)
+            throw new IllegalArgumentException("유저 1명만을 매칭할 수 없습니다.");
+
+        Collections.shuffle(users);
+        List<Review> reviews = new ArrayList<>();
 
         for (int i = 0; i < users.size() - 1; i++) {
             reviews.add(new Review(users.get(i), users.get(i + 1)));

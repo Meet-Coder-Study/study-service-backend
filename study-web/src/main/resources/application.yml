@@ -4,6 +4,15 @@ spring:
     include:
       - slack
       - oauth2
+
+  datasource:
+    driver-class-name: org.h2.Driver
+    url: jdbc:h2:tcp://localhost/~/testdb-blogposting2
+
+  batch:
+    job:
+      enabled: false
+
   jpa:
     properties:
       hibernate:
@@ -23,5 +32,6 @@ logging:
     org:
       hibernate:
         type:
-        descriptor:
-        sql: trace
+          descriptor:
+            sql: trace
+
