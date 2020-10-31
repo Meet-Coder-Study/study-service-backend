@@ -27,7 +27,6 @@ import lombok.RequiredArgsConstructor;
 
 @Entity
 @Getter
-@RequiredArgsConstructor
 @NoArgsConstructor
 public class Review extends BaseEntity {
 
