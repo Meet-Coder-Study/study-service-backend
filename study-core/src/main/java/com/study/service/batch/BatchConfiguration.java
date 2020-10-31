@@ -19,7 +19,7 @@ import org.springframework.transaction.PlatformTransactionManager;
 @RequiredArgsConstructor
 public class BatchConfiguration {
 
-    private static final String JOB_NAME = "reviewMatchingJob";;
+    private static final String JOB_NAME = "reviewMatchingJob";
     private static final String JOB_STEP1 = "step1";
 
     private final JobBuilderFactory jobBuilderFactory;
