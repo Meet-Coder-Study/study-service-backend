@@ -1,5 +1,6 @@
 package com.study.service.batch;
 
+import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.batch.core.Job;
 import org.springframework.batch.core.JobExecution;
@@ -13,16 +14,12 @@ import org.springframework.stereotype.Component;
 @Slf4j
 @Component
 @EnableScheduling
+@RequiredArgsConstructor
 public class SchedulingConfiguration {
 
     private final JobLauncher jobLauncher;
 
     private final Job job;
-
-    public SchedulingConfiguration(JobLauncher jobLauncher, Job job) {
-        this.jobLauncher = jobLauncher;
-        this.job = job;
-    }
 
     // Every Wednesday, 00:00
     @Scheduled(cron = "0 0 0 ? * WED")

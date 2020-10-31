@@ -1,8 +1,11 @@
 package com.study.service.review;
 
-import java.util.ArrayList;
 import java.util.Collections;
+import java.util.Map;
 import java.util.List;
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.stream.Collectors;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -16,13 +19,16 @@ import javax.validation.constraints.NotNull;
 import com.study.service.common.BaseEntity;
 import com.study.service.user.DeveloperType;
 import com.study.service.user.User;
-import lombok.Getter;
 
-import java.util.*;
-import java.util.stream.Collectors;
+import lombok.Getter;
+import lombok.NoArgsConstructor;
+import lombok.RequiredArgsConstructor;
+
 
 @Entity
 @Getter
+@RequiredArgsConstructor
+@NoArgsConstructor
 public class Review extends BaseEntity {
 
     @Id
@@ -38,10 +44,7 @@ public class Review extends BaseEntity {
     @JoinColumn(name = "reviewee", referencedColumnName = "user_id")
     private User reviewee;
 
-    public Review() {
-    }
-
-    public Review(final User reviewer, final User reviewee) {
+    public Review(User reviewer, User reviewee) {
         this.reviewer = reviewer;
         this.reviewee = reviewee;
     }
