@@ -22,8 +22,8 @@ public class SchedulingConfiguration {
     private final Job job;
 
     // Every Wednesday, 00:00
-    @Scheduled(cron = "0 0 0 ? * WED")
-    //@Scheduled(cron = "0/10 * * ? * *") // for test
+    //@Scheduled(cron = "0 0 0 ? * WED")
+    @Scheduled(cron = "0/10 * * ? * *") // for test
     public void perform() throws Exception {
         JobParameters params = new JobParametersBuilder()
                 .addString("timestamp", String.valueOf(System.currentTimeMillis()))

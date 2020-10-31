@@ -1,7 +1,13 @@
 spring:
+  profiles:
+    active: local
+    include:
+      - slack
+      - oauth2
+
   datasource:
     driver-class-name: org.h2.Driver
-    url: jdbc:h2:~/testdb-blogposting2
+    url: jdbc:h2:tcp://localhost/~/testdb-blogposting2
 
   batch:
     job:
