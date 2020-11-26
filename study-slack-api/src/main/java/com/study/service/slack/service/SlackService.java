@@ -16,11 +16,14 @@ import reactor.core.publisher.Mono;
 @Slf4j
 @Service
 public class SlackService {
-    private static final String SLACK_API_BASE_URL = "https://slack.com/api";
+    private static final String SLACK_API_BASE_URL = "https://hooks.slack.com";
     private final WebClient webClient;
 
     @Value("${slack.token}")
     private String token;
+
+    @Value("${slack.url}")
+    private String url;
 
     public SlackService() {
         final ExchangeStrategies exchangeStrategies = ExchangeStrategies.builder()
@@ -38,7 +41,7 @@ public class SlackService {
                 .exchangeStrategies(exchangeStrategies)
                 .filter(ExchangeFilterFunction.ofRequestProcessor(
                         clientRequest -> {
-                            log.error("Request: {} {} {}", clientRequest.method(), clientRequest.url(),
+                            log.info("Request: {} {} {}", clientRequest.method(), clientRequest.url(),
                                     clientRequest.body());
                             clientRequest.headers()
                                     .forEach((name, values) -> values.forEach(
@@ -50,7 +53,7 @@ public class SlackService {
     }
 
     public String sendMessage(final MessageRequest messageRequest) {
-        return webClient.post().uri("/chat.postMessage")
+        return webClient.post().uri(url)
                 .header(HttpHeaders.AUTHORIZATION, "Bearer " + token)
                 .body(BodyInserters.fromValue(messageRequest))
                 .retrieve()

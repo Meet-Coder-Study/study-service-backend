@@ -1,0 +1,4 @@
+slack:
+  token: my-token
+  url: ${slack-url}
+  channel: service개발
