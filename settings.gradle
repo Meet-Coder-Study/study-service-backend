@@ -2,4 +2,5 @@ rootProject.name = 'blog'
 include 'study-web'
 include 'study-core'
 include 'study-slack-api'
+include 'blog-rss'
 
